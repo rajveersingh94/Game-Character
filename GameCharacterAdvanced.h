@@ -18,6 +18,7 @@ private:
     int attackPoints;
     int defensePoints;
     bool isAlive;
+    time_t lastSaveTime;
 
 public:
     GameCharacter(const string& name, int maxHealth, int attackPoints, int defensePoints);
@@ -40,6 +41,8 @@ public:
     
     void saveToFile(const string& filename);
     void loadFromFile(const string& filename);
+    void displayDateTimeOfLastSave() const;
+    void displayTimeSinceLastSave() const;
 };
 
 #endif

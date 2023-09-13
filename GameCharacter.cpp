@@ -7,6 +7,7 @@
 
 #include "GameCharacterAdvanced.h"
 #include <fstream>
+#include <ctime> 
 using namespace std;
 
 /*
@@ -18,7 +19,9 @@ Constructor initializes a GameCharacter object with the provided parameters.
 */
 
 GameCharacter::GameCharacter(const string& name, int maxHealth, int attackPoints, int defensePoints)
-    : name(name), maxHealth(maxHealth), healthPoints(maxHealth), attackPoints(attackPoints), defensePoints(defensePoints), isAlive(true) {}
+    : name(name), maxHealth(maxHealth), healthPoints(maxHealth), attackPoints(attackPoints), defensePoints(defensePoints), isAlive(true) {
+        lastSaveTime = time(nullptr);
+    }
 /*
 Function name-getName
 Function description-Getter for the character's name
@@ -160,4 +163,15 @@ void GameCharacter::loadFromFile(const string& filename) {
         file >> isAlive;
         file.close();
     }
+}
+// Method to display the date and time when the character was last saved
+void GameCharacter::displayDateTimeOfLastSave() const {
+    cout << "Last Saved Time: " << std::ctime(&lastSaveTime);
+}
+
+// Method to display the time elapsed since the character was last saved
+void GameCharacter::displayTimeSinceLastSave() const {
+    time_t currentTime = time(nullptr);
+    double TimeLast = difftime(currentTime, lastSaveTime);
+    cout << "Time Since Last Save: " << TimeLast << " seconds" << endl;
 }
